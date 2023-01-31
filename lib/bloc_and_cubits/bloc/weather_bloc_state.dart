@@ -1,21 +1,20 @@
-import 'package:flutter/cupertino.dart';
-import 'package:learn_flutter/bloc_and_cubits/data/models/weather.dart';
+part of 'weather_bloc.dart';
 
 @immutable
-abstract class WeatherState {
-  const WeatherState();
+abstract class WeatherBlocState {
+  const WeatherBlocState();
 }
 
-class WeatherInitial extends WeatherState {
-  const WeatherInitial();
+class WeatherBlocInitial extends WeatherBlocState {
+  const WeatherBlocInitial();
 }
 
-class WeatherLoading extends WeatherState{
+class WeatherLoading extends WeatherBlocState{
   const WeatherLoading();
 
 }
 
-class WeatherLoaded extends WeatherState{
+class WeatherLoaded extends WeatherBlocState{
   final Weather weather;
   const WeatherLoaded(this.weather);
 
@@ -32,7 +31,7 @@ class WeatherLoaded extends WeatherState{
 
 }
 
-class WeatherError extends WeatherState{
+class WeatherError extends WeatherBlocState{
   final String message;
   const WeatherError(this.message);
 

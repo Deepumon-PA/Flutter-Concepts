@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:learn_flutter/bloc_and_cubits/ui_and_other/weather_repository.dart';
-import 'package:learn_flutter/bloc_and_cubits/ui_and_other/weather_search_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:learn_flutter/bloc_and_cubits/bloc/weather_bloc.dart';
+import 'package:learn_flutter/bloc_and_cubits/data/weather_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:learn_flutter/bloc_and_cubits/cubit/weather_cubit.dart';
+import 'package:learn_flutter/riverpod_2_0/counter_home_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ProviderScope(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: BlocProvider(
-        create: (context) => WeatherCubit(FakeWeatherRepository()),
+        // create: (context) => WeatherCubit(FakeWeatherRepository()), //for bloc with cubit
+        create: (context) => WeatherBloc(FakeWeatherRepository()), //for bloc only
         child: const MyHomePage(title: 'Learn Flutter'),
       ),
     );
@@ -46,7 +48,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
         title: Text(widget.title),
       ),
-      body: WeatherSearchPage(),
+      // body: WeatherSearchPage(), //Learn Bloc and Cubit
+      body: CounterHome(), //Learn RiverPod
     );
   }
 }
