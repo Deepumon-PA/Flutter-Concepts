@@ -19,7 +19,7 @@ class WeatherLoaded extends WeatherState{
   final Weather weather;
   const WeatherLoaded(this.weather);
 
-  ///overriding equality, which is important when using blocs, 'freese' is a package available to automatically avoid the boilerplate
+  ///overriding equality, which is important when using blocs, 'freezed' is a package available to automatically avoid the boilerplate
   ///otherwise bloc won't be able to emit two states one after the other
   @override
   bool operator ==(Object o) {

@@ -1,9 +1,8 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learn_flutter/bloc_and_cubits/bloc/weather_bloc.dart';
 import 'package:learn_flutter/bloc_and_cubits/cubit/weather_cubit.dart';
+
 // import 'package:learn_flutter/bloc_and_cubits/cubit/weather_cubit.dart';
 // import 'package:learn_flutter/bloc_and_cubits/cubit/weather_state.dart';
 import 'package:learn_flutter/bloc_and_cubits/data/models/weather.dart';
@@ -43,20 +42,20 @@ class _WeatherSearchPageState extends State<WeatherSearchPage> {
           },*/
 
         child: BlocConsumer<WeatherBloc, WeatherBlocState>(
-          listener: (context, state){
-            if(state is WeatherError){
-               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${state.message}')));
+          listener: (context, state) {
+            if (state is WeatherError) {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text('${state.message}')));
             }
           },
-
-          builder: (context, state){
-            if(state is WeatherBlocInitial){
-             return buildInitialInput();
-            }else if(state is WeatherLoading){
-               return buildLoading();
-            }else if (state is WeatherLoaded){
+          builder: (context, state) {
+            if (state is WeatherBlocInitial) {
+              return buildInitialInput();
+            } else if (state is WeatherLoading) {
+              return buildLoading();
+            } else if (state is WeatherLoaded) {
               return buildColumnWithData(state.weather);
-            }else{
+            } else {
               return buildInitialInput();
             }
           },
@@ -117,14 +116,13 @@ class CityInputField extends StatelessWidget {
   }
 
   void submitCityName(BuildContext context, String cityName) {
+    //---------------------for cubit------------------------------------------
+    // context.read<WeatherCubit>().getWeather(cityName);
+    //or
+    // BlocProvider.of<WeatherCubit>(context).getWeather(cityName);
 
-         //---------------------for cubit------------------------------------------
-          // context.read<WeatherCubit>().getWeather(cityName);
-                //or
-        // BlocProvider.of<WeatherCubit>(context).getWeather(cityName);
-
-        //---------------------for bloc only---------------------------------
-       final weatherBloc = context.read<WeatherBloc>();
-       weatherBloc.add(GetWeather(cityName)); //adds the event
+    //---------------------for bloc only---------------------------------
+    final weatherBloc = context.read<WeatherBloc>();
+    weatherBloc.add(GetWeather(cityName)); //adds the event
   }
 }

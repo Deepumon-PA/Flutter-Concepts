@@ -11,7 +11,6 @@ class WeatherBlocInitial extends WeatherBlocState {
 
 class WeatherLoading extends WeatherBlocState{
   const WeatherLoading();
-
 }
 
 class WeatherLoaded extends WeatherBlocState{

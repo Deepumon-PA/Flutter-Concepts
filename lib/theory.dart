@@ -263,4 +263,6 @@ class MyWidget extends StatelessWidget {
   }
 }
 
+
+///Square brackets in function argument list means, it is optional
 ///'*' in async* means it is a generator function, ie it produces a sequence of values asynchronously, 'yield' can be used to emit values in this case

@@ -11,12 +11,12 @@ final counterProvider = StateProvider.autoDispose((ref) => 0);
 
 
 abstract class WebSocketClient{
- Stream<int> getCounterStream();
+ Stream<int> getCounterStream([int start]);
 }
 
 class FakeWebSocketClient implements WebSocketClient{
   @override
-  Stream<int> getCounterStream() async* {
+  Stream<int> getCounterStream([int start = 0]) async* {
     int i = 0;
     while(true){
       await Future.delayed(const Duration(milliseconds: 500));
@@ -26,11 +26,11 @@ class FakeWebSocketClient implements WebSocketClient{
 }
 
 final webSocketClientProvider = Provider<WebSocketClient>((ref) {
-    return FakeWebSocketClient();
+    return FakeWebSocketClient(); // repositories can be provided this way
 });
 
-
-final webCounterProvider = StreamProvider((ref) {
+//family : is used to pass value into the provider, first type parameter is the type of the provider and second parameter is the value passed in
+final webCounterProvider = StreamProvider.family<int, int>((ref, start) {
   final wsClient = ref.watch(webSocketClientProvider);
-  return wsClient.getCounterStream();
+  return wsClient.getCounterStream(start);
 });
